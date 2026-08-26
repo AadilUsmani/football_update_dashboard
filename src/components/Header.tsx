@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { TIMEZONE_OPTIONS, COUNTRY_OPTIONS, formatKickoffTime } from '@/lib/timezone';
-import { Globe, Clock, Tv, Bot, Sparkles, Star, Bell } from 'lucide-react';
+import { Globe, Clock, Tv, Bot, Sparkles, Star } from 'lucide-react';
 
 interface HeaderProps {
   selectedTimezone: string;
@@ -47,112 +47,104 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80 backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-18 gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 gap-2">
           
           {/* Logo & Brand */}
-          <div className="flex items-center gap-3">
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 text-slate-950 font-black shadow-lg shadow-emerald-500/20">
-              <span className="text-xl">⚡</span>
-              <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-              </span>
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 text-slate-950 font-black shadow-md">
+              <span className="text-base sm:text-lg">⚡</span>
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-lg sm:text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-slate-400">
+              <div className="flex items-center gap-1.5">
+                <h1 className="text-base sm:text-lg font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300">
                   SPORTSSCOUT
                 </h1>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-medium">
-                  LIVE HUB
+                <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold hidden xs:inline">
+                  PKT HUB
                 </span>
               </div>
-              <p className="text-xs text-slate-400 hidden sm:block">
-                Football & Cricket Intelligence • Built for Adil Usmani
-              </p>
             </div>
           </div>
 
-          {/* Center / Right Controls: Timezone, Country, Reminders, LangGraph Agent */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+          {/* Controls: Timezone, Country, Guide, Favorites, AI */}
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-end">
             
-            {/* Live Clock Pill */}
-            <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-medium text-slate-300">
+            {/* Live Clock (Desktop) */}
+            <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300">
               <Clock className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-300 font-semibold">{currentTimeStr || 'Loading...'}</span>
+              <span className="text-emerald-300">{currentTimeStr}</span>
             </div>
 
-            {/* Timezone Selector (PKT Default) */}
+            {/* Timezone Selector */}
             <div className="relative flex items-center">
               <select
                 value={selectedTimezone}
                 onChange={(e) => onTimezoneChange(e.target.value)}
-                className="appearance-none bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-xs text-slate-200 rounded-lg pl-8 pr-7 py-2 font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/40 transition-colors"
-                title="Select Match Kickoff Timezone"
+                className="appearance-none bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[11px] sm:text-xs text-slate-200 rounded-xl pl-6 sm:pl-7 pr-5 py-1.5 font-bold cursor-pointer focus:outline-none"
+                title="Select Kickoff Timezone"
               >
                 {TIMEZONE_OPTIONS.map((tz) => (
                   <option key={tz.iana} value={tz.iana} className="bg-slate-900 text-white">
-                    {tz.code === 'PKT' ? '🇵🇰 ' : ''}{tz.label}
+                    {tz.code === 'PKT' ? '🇵🇰 ' : ''}{tz.code} ({tz.offset})
                   </option>
                 ))}
               </select>
-              <Globe className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 pointer-events-none" />
-              <span className="absolute right-2 text-slate-400 text-xs pointer-events-none">▾</span>
+              <Globe className="w-3 h-3 text-slate-400 absolute left-2 pointer-events-none" />
+              <span className="absolute right-1.5 text-slate-400 text-[10px] pointer-events-none">▾</span>
             </div>
 
-            {/* Country Selector (Pakistan Default for Broadcasts) */}
+            {/* Country Selector */}
             <div className="relative flex items-center">
               <select
                 value={selectedCountry}
                 onChange={(e) => onCountryChange(e.target.value)}
-                className="appearance-none bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-xs text-slate-200 rounded-lg pl-7 pr-7 py-2 font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-500/40 transition-colors"
-                title="Select Country for TV & Streaming Rights"
+                className="appearance-none bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[11px] sm:text-xs text-slate-200 rounded-xl pl-6 pr-5 py-1.5 font-bold cursor-pointer focus:outline-none"
+                title="Select Country for TV/OTT Rights"
               >
                 {COUNTRY_OPTIONS.map((c) => (
                   <option key={c.code} value={c.name} className="bg-slate-900 text-white">
-                    {c.flag} {c.name}
+                    {c.flag} {c.code}
                   </option>
                 ))}
               </select>
-              <span className="absolute left-2 text-xs pointer-events-none">{currentCountryObj.flag}</span>
-              <span className="absolute right-2 text-slate-400 text-xs pointer-events-none">▾</span>
+              <span className="absolute left-1.5 text-xs pointer-events-none">{currentCountryObj.flag}</span>
+              <span className="absolute right-1.5 text-slate-400 text-[10px] pointer-events-none">▾</span>
             </div>
 
-            {/* Where to Watch Guide Button */}
+            {/* Where to Watch Guide */}
             <button
               onClick={onOpenBroadcastGuide}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 transition-colors shadow-sm"
-              title="View TV Channels & OTT Providers by Country"
+              className="p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-cyan-300 transition-colors"
+              title="Where to Watch Guide"
             >
-              <Tv className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="hidden sm:inline">Where to Watch</span>
+              <Tv className="w-4 h-4 sm:mr-1 inline" />
+              <span className="hidden sm:inline">Guide</span>
             </button>
 
-            {/* Favorites Manager Button */}
+            {/* Favorites Button */}
             <button
               onClick={onOpenFavoritesModal}
-              className="relative flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-amber-300 transition-colors shadow-sm"
-              title="Manage Favorite Teams"
+              className="p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-amber-300 transition-colors"
+              title="My Favorite Teams"
             >
-              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-              <span className="hidden sm:inline">My Teams</span>
+              <Star className="w-4 h-4 fill-amber-400 inline sm:mr-1" />
+              <span className="hidden sm:inline">Teams</span>
               {favoritesCount > 0 && (
-                <span className="ml-0.5 px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-bold">
+                <span className="ml-1 px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 text-[10px]">
                   {favoritesCount}
                 </span>
               )}
             </button>
 
-            {/* LangGraph AI Agent Button */}
+            {/* AI Scout Button */}
             <button
               onClick={onOpenAgentDrawer}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.02]"
-              title="Open AI Match Scout (LangGraph Agent)"
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs shadow-md transition-all shrink-0"
+              title="Open AI Sports Scout"
             >
-              <Bot className="w-4 h-4 text-slate-950" />
-              <span>AI Scout</span>
-              <Sparkles className="w-3 h-3 text-slate-900" />
+              <Bot className="w-3.5 h-3.5 text-slate-950" />
+              <span className="hidden xs:inline">AI Scout</span>
             </button>
 
           </div>

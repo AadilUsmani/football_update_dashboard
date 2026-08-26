@@ -15,7 +15,7 @@ import { AgentChatDrawer } from '@/components/AgentChatDrawer';
 import { FOOTBALL_FIXTURES, FOOTBALL_TEAMS } from '@/lib/data/footballData';
 import { CRICKET_FIXTURES, CRICKET_TEAMS } from '@/lib/data/cricketData';
 import { Match, SportType, Team } from '@/lib/types';
-import { Sparkles, Bot, Tv, ShieldCheck, Heart, Code2 } from 'lucide-react';
+import { Sparkles, Bot, Code2, Globe } from 'lucide-react';
 
 export default function SportsDashboard() {
   // App state
@@ -29,7 +29,6 @@ export default function SportsDashboard() {
     'realmadrid',
     'arsenal',
     'pakistan',
-    'lahore_qalandars',
     'intermiami'
   ]);
 
@@ -109,7 +108,7 @@ export default function SportsDashboard() {
       />
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
+      <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 w-full flex-1 pb-32">
         
         {/* Sport Switcher Tabs */}
         <SportSelector
@@ -133,21 +132,21 @@ export default function SportsDashboard() {
         />
 
         {/* Fixtures Section Title */}
-        <div className="flex items-center justify-between gap-4 mb-4">
+        <div className="flex items-center justify-between gap-2 mb-4 px-1">
           <div className="flex items-center gap-2">
-            <span className="text-xl">
+            <span className="text-lg">
               {activeSport === 'football' ? '⚽' : activeSport === 'cricket' ? '🏏' : '🌟'}
             </span>
-            <h2 className="text-xl font-extrabold text-white">
+            <h2 className="text-base sm:text-lg font-black text-white">
               {activeSport === 'football' 
-                ? 'Premier League, MLS, La Liga, Bundesliga & Champions League' 
+                ? 'Premier League, La Liga, UCL, Bundesliga & MLS' 
                 : activeSport === 'cricket' 
-                  ? 'International Cricket (Test, ODI, T20I) & Franchise Leagues (PSL, IPL, BBL)' 
-                  : 'All Upcoming Global Matches'}
+                  ? 'International Tests, T20Is, ODIs & Franchise Leagues' 
+                  : 'All Upcoming Global Fixtures'}
             </h2>
           </div>
-          <span className="text-xs text-slate-400 hidden sm:block">
-            Showing times in <strong className="text-emerald-400">{selectedTimezone === 'Asia/Karachi' ? 'Pakistan Standard Time (PKT)' : selectedTimezone}</strong>
+          <span className="text-[11px] text-emerald-400 font-bold hidden md:inline">
+            All times in {selectedTimezone === 'Asia/Karachi' ? 'Pakistan Standard Time (PKT)' : selectedTimezone}
           </span>
         </div>
 
@@ -175,7 +174,7 @@ export default function SportsDashboard() {
         )}
 
         {activeSport === 'all' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {allMatches.map(match => (
               <FixtureCard
                 key={match.id}
@@ -192,24 +191,24 @@ export default function SportsDashboard() {
 
       </main>
 
-      {/* Floating LangGraph AI Agent Pill */}
-      <div className="fixed bottom-6 right-6 z-40">
+      {/* Floating LangGraph AI Agent Button */}
+      <div className="fixed bottom-5 right-4 sm:right-6 z-40">
         <button
           onClick={() => {
             setAgentInitialQuery('');
             setIsAgentDrawerOpen(true);
           }}
-          className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm shadow-2xl shadow-emerald-500/40 hover:scale-105 transition-all duration-200"
+          className="flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm shadow-2xl shadow-emerald-500/40 hover:scale-105 transition-all"
         >
-          <Bot className="w-5 h-5 text-slate-950" />
-          <span>Ask AI Scout (LangGraph)</span>
-          <Sparkles className="w-4 h-4 text-slate-900" />
+          <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-slate-950" />
+          <span>AI Scout</span>
+          <Sparkles className="w-3.5 h-3.5 text-slate-900" />
         </button>
       </div>
 
       {/* Footer */}
-      <footer className="mt-16 border-t border-slate-800/80 bg-slate-950/70 backdrop-blur-md py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+      <footer className="border-t border-slate-800/80 bg-slate-950/80 backdrop-blur-md py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
           <div className="flex items-center gap-2">
             <span>⚽🏏 Built for </span>
             <strong className="text-white font-bold">Adil Usmani</strong>
@@ -223,8 +222,8 @@ export default function SportsDashboard() {
               <span>@AadilUsmani</span>
             </a>
           </div>
-          <div className="flex items-center gap-4">
-            <span>Powered by LangGraph Agent Pipeline</span>
+          <div className="flex items-center gap-3">
+            <span>LangGraph Agent</span>
             <span>•</span>
             <span>Default: Pakistan Standard Time (PKT UTC+5)</span>
           </div>

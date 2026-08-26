@@ -3,31 +3,39 @@ import { Match, Team } from '../types';
 export const CRICKET_CATEGORIES = [
   { id: 'all', name: 'All Cricket', icon: '🏏', badge: 'All' },
   { id: 't20i', name: 'T20 International', icon: '🟢', badge: 'T20I', color: '#16a34a' },
-  { id: 'odi', name: 'One Day International', icon: '🔵', badge: 'ODI', color: '#2563eb' },
   { id: 'test', name: 'Test Matches', icon: '🔴', badge: 'TEST', color: '#dc2626' },
-  { id: 'psl', name: 'PSL 10 (Pakistan Super League)', icon: '🇵🇰', badge: 'PSL', color: '#059669' },
+  { id: 'odi', name: 'One Day International', icon: '🔵', badge: 'ODI', color: '#2563eb' },
+  { id: 'psl', name: 'PSL (Pakistan Super League)', icon: '🇵🇰', badge: 'PSL', color: '#059669' },
   { id: 'ipl', name: 'IPL (Indian Premier League)', icon: '🇮🇳', badge: 'IPL', color: '#0284c7' },
-  { id: 'bbl', name: 'Big Bash League (BBL)', icon: '🇦🇺', badge: 'BBL', color: '#ea580c' },
   { id: 'hundred', name: 'The Hundred', icon: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', badge: '100', color: '#7c3aed' },
-  { id: 'blast', name: 'Vitality T20 Blast', icon: '⚡', badge: 'Blast', color: '#e11d48' },
+  { id: 'bbl', name: 'Big Bash League', icon: '🇦🇺', badge: 'BBL', color: '#ea580c' },
 ];
 
 export const CRICKET_TEAMS: Team[] = [
-  // International National Teams
+  // International National Teams with high-reliability Flag CDN
   { 
     id: 'pakistan', 
     name: 'Pakistan', 
     shortName: 'PAK', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Pakistan_Cricket_Board_logo.svg/300px-Pakistan_Cricket_Board_logo.svg.png', 
+    crest: 'https://flagcdn.com/w160/pk.png', 
     sport: 'cricket', 
     leagueOrCountry: 'International (PCB)', 
     recentForm: ['W', 'W', 'L', 'W', 'W'] 
   },
   { 
+    id: 'england', 
+    name: 'England', 
+    shortName: 'ENG', 
+    crest: 'https://flagcdn.com/w160/gb-eng.png', 
+    sport: 'cricket', 
+    leagueOrCountry: 'International (ECB)', 
+    recentForm: ['W', 'W', 'W', 'L', 'W'] 
+  },
+  { 
     id: 'india', 
     name: 'India', 
     shortName: 'IND', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8d/Board_of_Control_for_Cricket_in_India_logo.svg/300px-Board_of_Control_for_Cricket_in_India_logo.svg.png', 
+    crest: 'https://flagcdn.com/w160/in.png', 
     sport: 'cricket', 
     leagueOrCountry: 'International (BCCI)', 
     recentForm: ['W', 'W', 'W', 'W', 'L'] 
@@ -36,25 +44,34 @@ export const CRICKET_TEAMS: Team[] = [
     id: 'australia', 
     name: 'Australia', 
     shortName: 'AUS', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/1b/Cricket_Australia_logo.svg/300px-Cricket_Australia_logo.svg.png', 
+    crest: 'https://flagcdn.com/w160/au.png', 
     sport: 'cricket', 
     leagueOrCountry: 'International (CA)', 
     recentForm: ['W', 'L', 'W', 'W', 'W'] 
   },
   { 
-    id: 'england', 
-    name: 'England', 
-    shortName: 'ENG', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/England_and_Wales_Cricket_Board_logo.svg/300px-England_and_Wales_Cricket_Board_logo.svg.png', 
+    id: 'srilanka', 
+    name: 'Sri Lanka', 
+    shortName: 'SL', 
+    crest: 'https://flagcdn.com/w160/lk.png', 
     sport: 'cricket', 
-    leagueOrCountry: 'International (ECB)', 
-    recentForm: ['L', 'W', 'L', 'W', 'W'] 
+    leagueOrCountry: 'International (SLC)', 
+    recentForm: ['L', 'L', 'W', 'L', 'L'] 
+  },
+  { 
+    id: 'bangladesh', 
+    name: 'Bangladesh', 
+    shortName: 'BAN', 
+    crest: 'https://flagcdn.com/w160/bd.png', 
+    sport: 'cricket', 
+    leagueOrCountry: 'International (BCB)', 
+    recentForm: ['W', 'L', 'L', 'W', 'L'] 
   },
   { 
     id: 'southafrica', 
     name: 'South Africa', 
     shortName: 'SA', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Cricket_South_Africa_logo.svg/300px-Cricket_South_Africa_logo.svg.png', 
+    crest: 'https://flagcdn.com/w160/za.png', 
     sport: 'cricket', 
     leagueOrCountry: 'International (CSA)', 
     recentForm: ['W', 'W', 'D', 'W', 'L'] 
@@ -63,19 +80,10 @@ export const CRICKET_TEAMS: Team[] = [
     id: 'newzealand', 
     name: 'New Zealand', 
     shortName: 'NZ', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/05/New_Zealand_Cricket_logo.svg/300px-New_Zealand_Cricket_logo.svg.png', 
+    crest: 'https://flagcdn.com/w160/nz.png', 
     sport: 'cricket', 
     leagueOrCountry: 'International (NZC)', 
     recentForm: ['W', 'L', 'W', 'W', 'L'] 
-  },
-  { 
-    id: 'bangladesh', 
-    name: 'Bangladesh', 
-    shortName: 'BAN', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Bangladesh_Cricket_Board_logo.svg/300px-Bangladesh_Cricket_Board_logo.svg.png', 
-    sport: 'cricket', 
-    leagueOrCountry: 'International (BCB)', 
-    recentForm: ['L', 'L', 'W', 'L', 'W'] 
   },
 
   // PSL (Pakistan Super League)
@@ -83,7 +91,7 @@ export const CRICKET_TEAMS: Team[] = [
     id: 'lahore_qalandars', 
     name: 'Lahore Qalandars', 
     shortName: 'LQ', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/75/Lahore_Qalandars_logo.svg/300px-Lahore_Qalandars_logo.svg.png', 
+    crest: '', 
     sport: 'cricket', 
     leagueOrCountry: 'Pakistan Super League', 
     recentForm: ['W', 'W', 'L', 'W', 'W'] 
@@ -92,7 +100,7 @@ export const CRICKET_TEAMS: Team[] = [
     id: 'karachi_kings', 
     name: 'Karachi Kings', 
     shortName: 'KK', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Karachi_Kings_logo.svg/300px-Karachi_Kings_logo.svg.png', 
+    crest: '', 
     sport: 'cricket', 
     leagueOrCountry: 'Pakistan Super League', 
     recentForm: ['L', 'W', 'W', 'L', 'W'] 
@@ -101,7 +109,7 @@ export const CRICKET_TEAMS: Team[] = [
     id: 'islamabad_united', 
     name: 'Islamabad United', 
     shortName: 'IU', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Islamabad_United_logo.svg/300px-Islamabad_United_logo.svg.png', 
+    crest: '', 
     sport: 'cricket', 
     leagueOrCountry: 'Pakistan Super League', 
     recentForm: ['W', 'W', 'W', 'L', 'W'] 
@@ -110,36 +118,18 @@ export const CRICKET_TEAMS: Team[] = [
     id: 'multan_sultans', 
     name: 'Multan Sultans', 
     shortName: 'MS', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b8/Multan_Sultans_logo.svg/300px-Multan_Sultans_logo.svg.png', 
+    crest: '', 
     sport: 'cricket', 
     leagueOrCountry: 'Pakistan Super League', 
     recentForm: ['W', 'L', 'W', 'W', 'W'] 
   },
-  { 
-    id: 'peshawar_zalmi', 
-    name: 'Peshawar Zalmi', 
-    shortName: 'PZ', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Peshawar_Zalmi_logo.svg/300px-Peshawar_Zalmi_logo.svg.png', 
-    sport: 'cricket', 
-    leagueOrCountry: 'Pakistan Super League', 
-    recentForm: ['W', 'L', 'W', 'L', 'W'] 
-  },
-  { 
-    id: 'quetta_gladiators', 
-    name: 'Quetta Gladiators', 
-    shortName: 'QG', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/Quetta_Gladiators_logo.svg/300px-Quetta_Gladiators_logo.svg.png', 
-    sport: 'cricket', 
-    leagueOrCountry: 'Pakistan Super League', 
-    recentForm: ['L', 'W', 'L', 'W', 'D'] 
-  },
 
-  // IPL (Indian Premier League)
+  // IPL
   { 
     id: 'csk', 
     name: 'Chennai Super Kings', 
     shortName: 'CSK', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/300px-Chennai_Super_Kings_Logo.svg.png', 
+    crest: '', 
     sport: 'cricket', 
     leagueOrCountry: 'Indian Premier League', 
     recentForm: ['W', 'W', 'L', 'W', 'W'] 
@@ -148,96 +138,145 @@ export const CRICKET_TEAMS: Team[] = [
     id: 'mi', 
     name: 'Mumbai Indians', 
     shortName: 'MI', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/300px-Mumbai_Indians_Logo.svg.png', 
+    crest: '', 
     sport: 'cricket', 
     leagueOrCountry: 'Indian Premier League', 
     recentForm: ['W', 'L', 'W', 'W', 'L'] 
   },
-  { 
-    id: 'rcb', 
-    name: 'Royal Challengers Bengaluru', 
-    shortName: 'RCB', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/Royal_Challengers_Bangalore_2020.svg/300px-Royal_Challengers_Bangalore_2020.svg.png', 
-    sport: 'cricket', 
-    leagueOrCountry: 'Indian Premier League', 
-    recentForm: ['W', 'W', 'W', 'L', 'W'] 
-  },
-  { 
-    id: 'kkr', 
-    name: 'Kolkata Knight Riders', 
-    shortName: 'KKR', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/300px-Kolkata_Knight_Riders_Logo.svg.png', 
-    sport: 'cricket', 
-    leagueOrCountry: 'Indian Premier League', 
-    recentForm: ['W', 'W', 'W', 'W', 'L'] 
-  },
-
-  // BBL (Big Bash League)
-  { 
-    id: 'melbourne_stars', 
-    name: 'Melbourne Stars', 
-    shortName: 'MS', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/90/Melbourne_Stars_logo.svg/300px-Melbourne_Stars_logo.svg.png', 
-    sport: 'cricket', 
-    leagueOrCountry: 'Big Bash League', 
-    recentForm: ['W', 'L', 'W', 'L', 'W'] 
-  },
-  { 
-    id: 'sydney_sixers', 
-    name: 'Sydney Sixers', 
-    shortName: 'SS', 
-    crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/29/Sydney_Sixers_logo.svg/300px-Sydney_Sixers_logo.svg.png', 
-    sport: 'cricket', 
-    leagueOrCountry: 'Big Bash League', 
-    recentForm: ['W', 'W', 'W', 'L', 'W'] 
-  },
 ];
 
-// Reference date helper for scheduling realistic upcoming matches
-const baseNow = new Date();
-const setSchedule = (daysAhead: number, utcHour: number, utcMinute: number) => {
-  const d = new Date(baseNow.getTime() + daysAhead * 24 * 60 * 60 * 1000);
-  d.setUTCHours(utcHour, utcMinute, 0, 0);
-  return d.toISOString();
+const now = new Date();
+const addDays = (d: number, hourUtc: number = 10, minuteUtc: number = 30) => {
+  const date = new Date(now.getTime() + d * 24 * 60 * 60 * 1000);
+  date.setUTCHours(hourUtc, minuteUtc, 0, 0);
+  return date.toISOString();
 };
 
 export const CRICKET_FIXTURES: Match[] = [
-  // 1. Pakistan vs England - 1st Test Match (Multan) - Session starts 10:00 AM PKT (5:00 AM UTC)
+  // 1. Pakistan vs Bangladesh - 2nd Test at Rawalpindi - 10:00 AM PKT (5:00 AM UTC)
   {
-    id: 'ck-test-pak-eng-01',
+    id: 'ck-test-pak-ban',
     sport: 'cricket',
     competitionId: 'test',
-    competitionName: 'England Tour of Pakistan 2024-25',
+    competitionName: 'ICC World Test Championship Series',
     competitionLogo: '🔴',
-    formatOrStage: '1st Test Match (Day 1)',
+    formatOrStage: '2nd Test Match (Day 1)',
     homeTeam: CRICKET_TEAMS.find(t => t.id === 'pakistan')!,
-    awayTeam: CRICKET_TEAMS.find(t => t.id === 'england')!,
-    utcKickoff: setSchedule(1, 5, 0), // 5:00 AM UTC = 10:00 AM PKT (Standard Test Match Time)
-    venue: 'Multan Cricket Stadium',
-    city: 'Multan, Pakistan',
+    awayTeam: CRICKET_TEAMS.find(t => t.id === 'bangladesh')!,
+    utcKickoff: addDays(1, 5, 0), // 5:00 AM UTC = 10:00 AM PKT
+    venue: 'Rawalpindi Cricket Stadium',
+    city: 'Rawalpindi, Pakistan',
     status: 'scheduled',
     broadcastsByCountry: {
-      'Pakistan': ['A Sports HD (Linear TV)', 'Ten Sports Pakistan HD', 'PTV Sports HD', 'Tapmad (Official OTT Stream)', 'Tamasha App (Free/HD)'],
-      'United Kingdom': ['Sky Sports Cricket', 'Sky Sports Main Event', 'BBC Radio 5 Live Sports Extra'],
-      'United States': ['Willow TV HD', 'Sling TV Willow Cricket'],
-      'India': ['FanCode Live Stream', 'Sony Sports Ten 5 HD'],
-      'UAE / Middle East': ['eLife CricLife 2 HD', 'STARZPLAY Sports Arabia'],
-      'Australia': ['Fox Cricket 501', 'Kayo Sports Live Stream']
+      'Pakistan': ['A Sports HD (Official Host Broadcaster)', 'Ten Sports Pakistan HD', 'PTV Sports HD', 'Tapmad (Live HD Stream)', 'Tamasha App (Free/HD)'],
+      'United Kingdom': ['Sky Sports Cricket', 'Sky Sports Main Event'],
+      'United States': ['Willow TV HD', 'Sling TV'],
+      'India': ['FanCode Live Stream', 'Sony Sports Network'],
+      'UAE / Middle East': ['eLife CricLife 2 HD', 'STARZPLAY Sports']
     },
     watchUrlsByCountry: {
       'Pakistan': 'https://tamashaweb.com',
       'United Kingdom': 'https://www.skysports.com/cricket',
-      'United States': 'https://www.willow.tv',
-      'India': 'https://www.fancode.com'
+      'United States': 'https://www.willow.tv'
     },
-    headToHeadSummary: 'Historic Test rivalry. Multan surface offers traditional spin and dry bounce in subcontinental conditions.',
-    keyPlayers: ['Shan Masood (C)', 'Babar Azam', 'Shaheen Shah Afridi', 'Ben Stokes (C)', 'Joe Root', 'Harry Brook'],
-    aiMatchInsight: '10:00 AM PKT start in Multan. England’s Bazball aggression meets Pakistan’s reverse swing and spin attack in a crucial World Test Championship clash.'
+    headToHeadSummary: 'Crucial ICC World Test Championship fixture in Rawalpindi with true bounce and seam movement on day 1.',
+    keyPlayers: ['Shan Masood (C)', 'Babar Azam', 'Shaheen Shah Afridi', 'Najmul Hossain Shanto (C)', 'Shakib Al Hasan'],
+    aiMatchInsight: '10:00 AM PKT kickoff. Pakistan looks to dominate with pace attack in Rawalpindi.'
   },
 
-  // 2. Australia vs Pakistan - 1st ODI (MCG Melbourne) - 8:30 AM PKT (3:30 AM UTC)
+  // 2. England vs Sri Lanka - 2nd Test at Lord's (London) - 3:00 PM PKT (10:00 AM UTC / 11:00 AM BST)
   {
-    id: 'ck-odi-aus-pak-01',
+    id: 'ck-test-eng-sl',
+    sport: 'cricket',
+    competitionId: 'test',
+    competitionName: 'Sri Lanka Tour of England',
+    competitionLogo: '🔴',
+    formatOrStage: '2nd Test Match (Day 1)',
+    homeTeam: CRICKET_TEAMS.find(t => t.id === 'england')!,
+    awayTeam: CRICKET_TEAMS.find(t => t.id === 'srilanka')!,
+    utcKickoff: addDays(2, 10, 0), // 10:00 AM UTC = 3:00 PM PKT (11:00 AM London)
+    venue: "Lord's Cricket Ground",
+    city: 'London, England',
+    status: 'scheduled',
+    broadcastsByCountry: {
+      'Pakistan': ['A Sports HD', 'Ten Sports HD', 'Tapmad Live Stream'],
+      'United Kingdom': ['Sky Sports Cricket', 'Sky Sports Main Event', 'BBC Radio 5 Live'],
+      'United States': ['Willow TV HD'],
+      'India': ['Sony Sports Ten 1 HD', 'Sony LIV'],
+      'Sri Lanka': ['SLRC / Channel Eye', 'ThePapare']
+    },
+    watchUrlsByCountry: {
+      'Pakistan': 'https://www.tapmad.com/sports',
+      'United Kingdom': 'https://www.skysports.com/cricket'
+    },
+    headToHeadSummary: 'Historic Lord’s encounter. England holds a commanding record in home summer Tests.',
+    keyPlayers: ['Ollie Pope (C)', 'Joe Root', 'Harry Brook', 'Dhananjaya de Silva (C)', 'Kamindu Mendis'],
+    aiMatchInsight: '3:00 PM PKT afternoon start in Pakistan. Joe Root aims for milestone hundreds on the Lord’s honours board.'
+  },
+
+  // 3. England vs Australia - 1st T20I at Southampton - 10:30 PM PKT (5:30 PM UTC / 6:30 PM BST)
+  {
+    id: 'ck-t20i-eng-aus',
+    sport: 'cricket',
+    competitionId: 't20i',
+    competitionName: 'Australia Tour of England',
+    competitionLogo: '🟢',
+    formatOrStage: '1st T20 International (Night)',
+    homeTeam: CRICKET_TEAMS.find(t => t.id === 'england')!,
+    awayTeam: CRICKET_TEAMS.find(t => t.id === 'australia')!,
+    utcKickoff: addDays(3, 17, 30), // 5:30 PM UTC = 10:30 PM PKT (6:30 PM UK)
+    venue: 'Utilita Bowl',
+    city: 'Southampton, England',
+    status: 'scheduled',
+    broadcastsByCountry: {
+      'Pakistan': ['A Sports HD', 'Ten Sports Pakistan', 'Tapmad (Live HD OTT)', 'Tamasha App'],
+      'United Kingdom': ['Sky Sports Cricket', 'Sky Sports Main Event'],
+      'Australia': ['Fox Cricket 501', 'Kayo Sports Live Stream'],
+      'United States': ['Willow TV HD'],
+      'India': ['Sony Sports Ten 5 HD', 'Sony LIV Stream']
+    },
+    watchUrlsByCountry: {
+      'Pakistan': 'https://tamashaweb.com',
+      'United Kingdom': 'https://www.skysports.com/cricket',
+      'Australia': 'https://kayosports.com.au'
+    },
+    headToHeadSummary: 'Fierce Ashes rivals clash in high-octane T20 cricket in England.',
+    keyPlayers: ['Jos Buttler (C)', 'Phil Salt', 'Jofra Archer', 'Mitchell Marsh (C)', 'Travis Head', 'Adam Zampa'],
+    aiMatchInsight: '10:30 PM PKT prime-time night match. Archer vs Travis Head with the new white ball.'
+  },
+
+  // 4. India vs Bangladesh - 1st Test at Chennai - 9:00 AM PKT (4:00 AM UTC / 9:30 AM IST)
+  {
+    id: 'ck-test-ind-ban',
+    sport: 'cricket',
+    competitionId: 'test',
+    competitionName: 'Bangladesh Tour of India',
+    competitionLogo: '🔴',
+    formatOrStage: '1st Test Match (Day 1)',
+    homeTeam: CRICKET_TEAMS.find(t => t.id === 'india')!,
+    awayTeam: CRICKET_TEAMS.find(t => t.id === 'bangladesh')!,
+    utcKickoff: addDays(5, 4, 0), // 4:00 AM UTC = 9:00 AM PKT
+    venue: 'MA Chidambaram Stadium (Chepauk)',
+    city: 'Chennai, India',
+    status: 'scheduled',
+    broadcastsByCountry: {
+      'Pakistan': ['Ten Sports Pakistan HD', 'Tapmad Sports'],
+      'India': ['Sports18 1 HD (English)', 'Colors Cineplex (Hindi)', 'JioCinema (Free 4K Stream)'],
+      'United Kingdom': ['TNT Sports 1'],
+      'United States': ['Willow TV HD']
+    },
+    watchUrlsByCountry: {
+      'Pakistan': 'https://www.tapmad.com/sports',
+      'India': 'https://www.jiocinema.com/sports'
+    },
+    headToHeadSummary: 'Spin-friendly Chepauk conditions test batters against Ashwin and Jadeja.',
+    keyPlayers: ['Rohit Sharma (C)', 'Virat Kohli', 'Ravichandran Ashwin', 'Jasprit Bumrah', 'Shakib Al Hasan'],
+    aiMatchInsight: '9:00 AM PKT morning kickoff in Pakistan.'
+  },
+
+  // 5. Pakistan Tour of Australia - 1st ODI at MCG - 8:30 AM PKT (3:30 AM UTC / 2:30 PM AEDT)
+  {
+    id: 'ck-odi-pak-aus',
     sport: 'cricket',
     competitionId: 'odi',
     competitionName: 'Pakistan Tour of Australia',
@@ -245,174 +284,49 @@ export const CRICKET_FIXTURES: Match[] = [
     formatOrStage: '1st One Day International (D/N)',
     homeTeam: CRICKET_TEAMS.find(t => t.id === 'australia')!,
     awayTeam: CRICKET_TEAMS.find(t => t.id === 'pakistan')!,
-    utcKickoff: setSchedule(3, 3, 30), // 3:30 AM UTC = 8:30 AM PKT (Australian Day/Night Time)
+    utcKickoff: addDays(8, 3, 30), // 3:30 AM UTC = 8:30 AM PKT
     venue: 'Melbourne Cricket Ground (MCG)',
     city: 'Melbourne, Australia',
     status: 'scheduled',
     broadcastsByCountry: {
-      'Pakistan': ['A Sports HD', 'Ten Sports HD', 'Tapmad (HD Stream)', 'Tamasha (Mobile Stream)'],
-      'Australia': ['Fox Cricket', 'Channel 7 (Free-to-Air)', 'Kayo Sports'],
-      'United Kingdom': ['TNT Sports 1', 'discovery+ Cricket'],
-      'United States': ['Willow TV HD', 'ESPN+'],
-      'India': ['Star Sports 1 HD', 'Disney+ Hotstar Live']
-    },
-    watchUrlsByCountry: {
-      'Pakistan': 'https://www.tapmad.com/sports',
-      'Australia': 'https://kayosports.com.au',
-      'United States': 'https://www.willow.tv'
-    },
-    headToHeadSummary: 'MCG pace and carry will challenge top-order batters in the opening 50-over encounter.',
-    keyPlayers: ['Mohammad Rizwan (C)', 'Babar Azam', 'Naseem Shah', 'Pat Cummins (C)', 'Mitchell Starc', 'Glenn Maxwell'],
-    aiMatchInsight: '8:30 AM PKT kickoff at the iconic MCG. Shaheen Afridi with the new white kookaburra ball testing Travis Head and Steve Smith.'
-  },
-
-  // 3. Australia vs Pakistan - 2nd T20I (SCG Sydney) - 1:00 PM PKT (8:00 AM UTC)
-  {
-    id: 'ck-t20i-aus-pak-02',
-    sport: 'cricket',
-    competitionId: 't20i',
-    competitionName: 'Pakistan Tour of Australia',
-    competitionLogo: '🟢',
-    formatOrStage: '2nd T20 International (Night)',
-    homeTeam: CRICKET_TEAMS.find(t => t.id === 'australia')!,
-    awayTeam: CRICKET_TEAMS.find(t => t.id === 'pakistan')!,
-    utcKickoff: setSchedule(5, 8, 0), // 8:00 AM UTC = 1:00 PM PKT (Night match in Sydney)
-    venue: 'Sydney Cricket Ground (SCG)',
-    city: 'Sydney, Australia',
-    status: 'scheduled',
-    broadcastsByCountry: {
-      'Pakistan': ['A Sports HD', 'Ten Sports Pakistan HD', 'Tapmad Sports', 'Tamasha App (Free/HD)'],
-      'Australia': ['Fox Cricket', 'Kayo Sports Live'],
-      'United Kingdom': ['TNT Sports 2'],
-      'United States': ['Willow TV HD'],
-      'India': ['Star Sports Network', 'Disney+ Hotstar']
+      'Pakistan': ['A Sports HD', 'Ten Sports HD', 'PTV Sports HD', 'Tapmad (Live HD)', 'Tamasha App'],
+      'Australia': ['Channel 7 (Free)', 'Fox Cricket', 'Kayo Sports'],
+      'United Kingdom': ['TNT Sports 1'],
+      'United States': ['Willow TV']
     },
     watchUrlsByCountry: {
       'Pakistan': 'https://tamashaweb.com',
-      'United States': 'https://www.willow.tv'
+      'Australia': 'https://kayosports.com.au'
     },
-    headToHeadSummary: 'Fast-paced T20 clash under Sydney floodlights with spin playing a crucial role through middle overs.',
-    keyPlayers: ['Babar Azam', 'Haris Rauf', 'Saim Ayub', 'Josh Inglis (C)', 'Marcus Stoinis', 'Adam Zampa'],
-    aiMatchInsight: '1:00 PM PKT prime-time afternoon viewing in Pakistan. High-scoring dimensions at SCG.'
+    headToHeadSummary: 'Pace and bounce at the massive MCG venue. Shaheen and Naseem lead the Pakistan attack.',
+    keyPlayers: ['Mohammad Rizwan (C)', 'Babar Azam', 'Shaheen Shah Afridi', 'Pat Cummins (C)', 'Mitchell Starc'],
+    aiMatchInsight: '8:30 AM PKT morning match in Pakistan.'
   },
 
-  // 4. Australia vs India - 1st Test (Border-Gavaskar Trophy - Perth) - 7:20 AM PKT (2:20 AM UTC)
+  // 6. PSL 10 Marquee Preview: Lahore Qalandars vs Karachi Kings
   {
-    id: 'ck-test-ind-aus-01',
-    sport: 'cricket',
-    competitionId: 'test',
-    competitionName: 'Border-Gavaskar Trophy (5 Tests)',
-    competitionLogo: '🔴',
-    formatOrStage: '1st Test Match (Day 1)',
-    homeTeam: CRICKET_TEAMS.find(t => t.id === 'australia')!,
-    awayTeam: CRICKET_TEAMS.find(t => t.id === 'india')!,
-    utcKickoff: setSchedule(7, 2, 20), // 2:20 AM UTC = 7:20 AM PKT (10:20 AM Perth Local)
-    venue: 'Optus Stadium',
-    city: 'Perth, Australia',
-    status: 'scheduled',
-    broadcastsByCountry: {
-      'Pakistan': ['Ten Sports Pakistan HD', 'Tapmad Live Stream', 'A Sports HD'],
-      'India': ['Star Sports 1 HD (English)', 'Star Sports 1 Hindi HD', 'Disney+ Hotstar (4K Stream)'],
-      'Australia': ['Channel 7', 'Fox Cricket 501', 'Kayo Sports Live'],
-      'United Kingdom': ['TNT Sports 1', 'discovery+ Cricket Pass'],
-      'United States': ['Willow TV', 'ESPN+']
-    },
-    watchUrlsByCountry: {
-      'Pakistan': 'https://www.tapmad.com/sports',
-      'India': 'https://www.hotstar.com/sports/cricket',
-      'United States': 'https://www.willow.tv'
-    },
-    headToHeadSummary: 'The marquee 5-match Test series in world cricket. Optus Stadium in Perth provides fierce bounce and extreme pace.',
-    keyPlayers: ['Rohit Sharma (C)', 'Virat Kohli', 'Jasprit Bumrah', 'Pat Cummins (C)', 'Steve Smith', 'Mitchell Starc'],
-    aiMatchInsight: '7:20 AM PKT start. Fastest pitch in Australia tests India’s top order against Cummins, Starc, and Hazlewood.'
-  },
-
-  // 5. PSL 10: Lahore Qalandars vs Karachi Kings (The Ultimate Derby) - 7:30 PM PKT (2:30 PM UTC)
-  {
-    id: 'ck-psl-10-lq-kk',
+    id: 'ck-psl-derby',
     sport: 'cricket',
     competitionId: 'psl',
-    competitionName: 'Pakistan Super League (PSL 10)',
+    competitionName: 'PSL 10 (Pakistan Super League)',
     competitionLogo: '🇵🇰',
-    formatOrStage: 'League Stage (Rivalry Night)',
+    formatOrStage: 'Upcoming PSL 10 Season Marquee Derby',
     homeTeam: CRICKET_TEAMS.find(t => t.id === 'lahore_qalandars')!,
     awayTeam: CRICKET_TEAMS.find(t => t.id === 'karachi_kings')!,
-    utcKickoff: setSchedule(2, 14, 30), // 2:30 PM UTC = 7:30 PM PKT (Official PSL Night Time)
+    utcKickoff: addDays(12, 14, 30), // 2:30 PM UTC = 7:30 PM PKT
     venue: 'Gaddafi Stadium',
     city: 'Lahore, Pakistan',
     status: 'scheduled',
     broadcastsByCountry: {
-      'Pakistan': ['A Sports HD (Official Host)', 'Ten Sports HD', 'PTV Sports HD', 'Tapmad (Official OTT Stream)', 'Tamasha App (Free/HD)', 'Myco App'],
-      'United Kingdom': ['Sky Sports Cricket', 'Sky Sports Main Event'],
-      'United States': ['Willow TV HD', 'Sling TV Willow'],
-      'India': ['Sony Sports Ten 5 HD', 'FanCode Stream'],
-      'UAE / Middle East': ['eLife CricLife 1 HD', 'STARZPLAY Sports']
-    },
-    watchUrlsByCountry: {
-      'Pakistan': 'https://tamashaweb.com',
-      'United Kingdom': 'https://www.skysports.com/cricket',
-      'United States': 'https://www.willow.tv'
-    },
-    headToHeadSummary: 'The undisputed El Clásico of PSL. Packed 27,000 capacity crowd at Gaddafi Stadium.',
-    keyPlayers: ['Shaheen Shah Afridi (C)', 'Fakhar Zaman', 'Haris Rauf', 'Shan Masood (C)', 'Shoaib Malik', 'Hasan Ali'],
-    aiMatchInsight: '7:30 PM PKT prime-time fixture. Shaheen’s 145kph opening burst against Shan Masood in an electric Lahore atmosphere.'
-  },
-
-  // 6. PSL 10: Islamabad United vs Multan Sultans - 7:30 PM PKT (2:30 PM UTC)
-  {
-    id: 'ck-psl-10-iu-ms',
-    sport: 'cricket',
-    competitionId: 'psl',
-    competitionName: 'Pakistan Super League (PSL 10)',
-    competitionLogo: '🇵🇰',
-    formatOrStage: 'League Stage (Top-of-Table Clash)',
-    homeTeam: CRICKET_TEAMS.find(t => t.id === 'islamabad_united')!,
-    awayTeam: CRICKET_TEAMS.find(t => t.id === 'multan_sultans')!,
-    utcKickoff: setSchedule(4, 14, 30), // 2:30 PM UTC = 7:30 PM PKT
-    venue: 'Rawalpindi Cricket Stadium',
-    city: 'Rawalpindi, Pakistan',
-    status: 'scheduled',
-    broadcastsByCountry: {
-      'Pakistan': ['A Sports HD', 'Ten Sports HD', 'PTV Sports HD', 'Tapmad Live', 'Tamasha App'],
+      'Pakistan': ['A Sports HD (Host Broadcaster)', 'Ten Sports HD', 'PTV Sports HD', 'Tapmad OTT', 'Tamasha App (Free/HD)'],
       'United Kingdom': ['Sky Sports Cricket'],
-      'United States': ['Willow TV']
+      'United States': ['Willow TV HD']
     },
     watchUrlsByCountry: {
       'Pakistan': 'https://tamashaweb.com'
     },
-    headToHeadSummary: 'Defending champions Islamabad United face consistent finalist Multan Sultans at the high-scoring Pindi ground.',
-    keyPlayers: ['Shadab Khan (C)', 'Naseem Shah', 'Alex Hales', 'Mohammad Rizwan (C)', 'Usman Khan', 'Usama Mir'],
-    aiMatchInsight: '7:30 PM PKT kickoff. Short boundaries and true bounce in Rawalpindi guarantee boundary-heavy fireworks.'
-  },
-
-  // 7. IPL: Chennai Super Kings vs Mumbai Indians (IPL El Clásico) - 7:00 PM PKT (2:00 PM UTC)
-  {
-    id: 'ck-ipl-csk-mi',
-    sport: 'cricket',
-    competitionId: 'ipl',
-    competitionName: 'Indian Premier League (IPL)',
-    competitionLogo: '🇮🇳',
-    formatOrStage: 'Match 14 (Night Game)',
-    homeTeam: CRICKET_TEAMS.find(t => t.id === 'csk')!,
-    awayTeam: CRICKET_TEAMS.find(t => t.id === 'mi')!,
-    utcKickoff: setSchedule(6, 14, 0), // 2:00 PM UTC = 7:00 PM PKT (7:30 PM IST)
-    venue: 'MA Chidambaram Stadium (Chepauk)',
-    city: 'Chennai, India',
-    status: 'scheduled',
-    broadcastsByCountry: {
-      'Pakistan': ['Tapmad Sports (Live Stream Feed)', 'A Sports HD (Select)', 'Ten Sports'],
-      'India': ['Star Sports 1 HD (Linear TV)', 'JioCinema (Free 4K Multi-angle Stream)'],
-      'United Kingdom': ['Sky Sports Cricket', 'Sky Sports Main Event', 'DAZN UK'],
-      'United States': ['Willow TV', 'Cricbuzz Stream'],
-      'UAE / Middle East': ['Cricbuzz App', 'TOD Streaming', 'STARZPLAY']
-    },
-    watchUrlsByCountry: {
-      'Pakistan': 'https://www.tapmad.com/sports',
-      'India': 'https://www.jiocinema.com/sports/cricket',
-      'United Kingdom': 'https://www.skysports.com'
-    },
-    headToHeadSummary: '5-time IPL Champions CSK vs 5-time IPL Champions MI in the most watched T20 franchise game globally.',
-    keyPlayers: ['MS Dhoni', 'Ruturaj Gaikwad (C)', 'Ravindra Jadeja', 'Rohit Sharma', 'Hardik Pandya (C)', 'Jasprit Bumrah'],
-    aiMatchInsight: '7:00 PM PKT. Chepauk’s spinning track sets up Jadeja and Dhoni against Bumrah and Mumbai’s power hitters.'
+    headToHeadSummary: 'The undisputed El Clásico of Pakistan franchise cricket.',
+    keyPlayers: ['Shaheen Shah Afridi (C)', 'Fakhar Zaman', 'Haris Rauf', 'Shan Masood (C)', 'Shoaib Malik'],
+    aiMatchInsight: '7:30 PM PKT official PSL night slot.'
   }
 ];
