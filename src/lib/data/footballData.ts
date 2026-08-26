@@ -40,35 +40,34 @@ export const FOOTBALL_TEAMS: Team[] = [
   { id: 'columbus', name: 'Columbus Crew', shortName: 'CLB', crest: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Columbus_Crew_logo_%282021%29.svg/300px-Columbus_Crew_logo_%282021%29.svg.png', sport: 'football', leagueOrCountry: 'MLS', recentForm: ['W', 'W', 'W', 'D', 'W'] },
 ];
 
-const now = new Date();
-const addHours = (h: number) => new Date(now.getTime() + h * 60 * 60 * 1000).toISOString();
-const addDays = (d: number, hourUtc: number = 19, minuteUtc: number = 0) => {
-  const date = new Date(now.getTime() + d * 24 * 60 * 60 * 1000);
-  date.setUTCHours(hourUtc, minuteUtc, 0, 0);
-  return date.toISOString();
+const baseNow = new Date();
+const setSchedule = (daysAhead: number, utcHour: number, utcMinute: number) => {
+  const d = new Date(baseNow.getTime() + daysAhead * 24 * 60 * 60 * 1000);
+  d.setUTCHours(utcHour, utcMinute, 0, 0);
+  return d.toISOString();
 };
 
 export const FOOTBALL_FIXTURES: Match[] = [
-  // 1. EPL: Arsenal vs Man City (Super Clash)
+  // 1. EPL: Arsenal vs Manchester City (Super Sunday) - 8:30 PM PKT (3:30 PM UTC / 4:30 PM BST)
   {
-    id: 'fb-epl-01',
+    id: 'fb-epl-ars-mci',
     sport: 'football',
     competitionId: 'epl',
     competitionName: 'Premier League',
     competitionLogo: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
-    formatOrStage: 'Matchweek 28',
+    formatOrStage: 'Matchweek 5 (Super Sunday)',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'arsenal')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'mancity')!,
-    utcKickoff: addDays(1, 15, 30), // e.g. Tomorrow 3:30 PM UTC -> 8:30 PM PKT
+    utcKickoff: setSchedule(1, 15, 30), // 3:30 PM UTC = 8:30 PM PKT
     venue: 'Emirates Stadium',
-    city: 'London',
+    city: 'London, England',
     status: 'scheduled',
     broadcastsByCountry: {
-      'Pakistan': ['Tapmad (Live HD Stream)', 'A Sports HD (Cable/Satellite)', 'Sony LIV (Select matches)'],
+      'Pakistan': ['Tapmad (Exclusive Live HD Stream)', 'A Sports HD (Satellite/Cable)', 'Sony LIV (Select matches)'],
       'United Kingdom': ['Sky Sports Main Event', 'Sky Sports Premier League', 'NOW TV'],
       'United States': ['NBC Sports', 'Peacock Premium', 'Telemundo Deportes'],
       'India': ['Star Sports Select HD 1', 'Disney+ Hotstar Live'],
-      'UAE / Middle East': ['beIN Sports 1 Premium', 'TOD App Stream'],
+      'UAE / Middle East': ['beIN Sports 1 Premium English & Arabic', 'TOD App Stream'],
       'Germany': ['Sky Sport Bundesliga', 'WOW Live Stream'],
       'Spain': ['DAZN LaLiga', 'Movistar Plus+'],
       'Canada': ['FuboTV Canada Live'],
@@ -80,24 +79,24 @@ export const FOOTBALL_FIXTURES: Match[] = [
       'United States': 'https://www.peacocktv.com/sports',
       'India': 'https://www.hotstar.com/sports/football'
     },
-    headToHeadSummary: 'Arsenal won the last meeting at Emirates 1-0; City unbeaten in previous 8.',
-    keyPlayers: ['Bukayo Saka', 'Erling Haaland', 'Martin Ødegaard', 'Kevin De Bruyne'],
-    aiMatchInsight: 'Title decider clash. Arsenal’s solid defensive record faces Haaland’s electric scoring run in what promises to be a tactical masterclass.'
+    headToHeadSummary: 'Arsenal won the last meeting at the Emirates 1-0; City had won previous 8 meetings.',
+    keyPlayers: ['Bukayo Saka', 'Martin Ødegaard', 'Erling Haaland', 'Kevin De Bruyne', 'Declan Rice'],
+    aiMatchInsight: '8:30 PM PKT kickoff at the Emirates. Arsenal’s defensive resilience led by Saliba and Gabriel faces Haaland’s electric scoring rate in the title decider.'
   },
 
-  // 2. La Liga: Real Madrid vs Barcelona (El Clásico)
+  // 2. La Liga: Real Madrid vs FC Barcelona (El Clásico) - 12:00 AM Midnight PKT (7:00 PM UTC / 9:00 PM CEST)
   {
-    id: 'fb-laliga-01',
+    id: 'fb-laliga-rma-fcb',
     sport: 'football',
     competitionId: 'laliga',
     competitionName: 'La Liga',
     competitionLogo: '🇪🇸',
-    formatOrStage: 'Jornada 32',
+    formatOrStage: 'Jornada 11 (El Clásico)',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'realmadrid')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'barcelona')!,
-    utcKickoff: addDays(2, 19, 0), // In 2 days 7:00 PM UTC -> 12:00 AM Midnight PKT
+    utcKickoff: setSchedule(2, 19, 0), // 7:00 PM UTC = 12:00 AM Midnight PKT
     venue: 'Santiago Bernabéu',
-    city: 'Madrid',
+    city: 'Madrid, Spain',
     status: 'scheduled',
     broadcastsByCountry: {
       'Pakistan': ['Galaxy Sports HD', 'Tapmad Sports', 'beIN Sports MENA (Satellite)'],
@@ -115,29 +114,29 @@ export const FOOTBALL_FIXTURES: Match[] = [
       'India': 'https://www.jiocinema.com/sports',
       'UAE / Middle East': 'https://www.tod.tv/en/sports'
     },
-    headToHeadSummary: 'Real Madrid and Barcelona have shared dramatic encounters with high-scoring drama in recent Bernabéu fixtures.',
-    keyPlayers: ['Vinícius Júnior', 'Kylian Mbappé', 'Lamine Yamal', 'Robert Lewandowski'],
-    aiMatchInsight: 'El Clásico under the Bernabéu lights! Mbappé and Vinícius flank the attack against Hansi Flick’s aggressive high-press Barcelona.'
+    headToHeadSummary: 'Real Madrid won both league Clásicos last season. Bernabéu fixtures have averaged 3.6 goals over the last 5 meetings.',
+    keyPlayers: ['Vinícius Júnior', 'Kylian Mbappé', 'Jude Bellingham', 'Lamine Yamal', 'Robert Lewandowski', 'Raphinha'],
+    aiMatchInsight: '12:00 AM Midnight PKT start. Mbappé and Vinícius test Hansi Flick’s aggressive high-defensive line in the biggest club football match on earth.'
   },
 
-  // 3. UCL: Bayern Munich vs Real Madrid (European Royalty)
+  // 3. UCL: Bayern Munich vs Real Madrid - 12:00 AM PKT (7:00 PM UTC / 9:00 PM CET)
   {
-    id: 'fb-ucl-01',
+    id: 'fb-ucl-bay-rma',
     sport: 'football',
     competitionId: 'ucl',
-    competitionName: 'Champions League',
+    competitionName: 'UEFA Champions League',
     competitionLogo: '🏆',
-    formatOrStage: 'Quarter-Final 1st Leg',
+    formatOrStage: 'League Phase Blockbuster',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'bayern')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'realmadrid')!,
-    utcKickoff: addDays(4, 19, 0), // In 4 days 7:00 PM UTC -> 12:00 AM PKT
+    utcKickoff: setSchedule(4, 19, 0), // 7:00 PM UTC = 12:00 AM Midnight PKT
     venue: 'Allianz Arena',
-    city: 'Munich',
+    city: 'Munich, Germany',
     status: 'scheduled',
     broadcastsByCountry: {
       'Pakistan': ['Tapmad (Exclusive Live Stream)', 'A Sports HD (Select UCL)', 'Sony LIV HD'],
       'United Kingdom': ['TNT Sports 1', 'discovery+ App', 'Amazon Prime Video (Tuesday Pick)'],
-      'United States': ['Paramount+', 'CBS Sports Network', 'Univision / TUDN'],
+      'United States': ['Paramount+ (All Matches Live)', 'CBS Sports Network', 'Univision / TUDN'],
       'India': ['Sony Sports Ten 2 HD', 'Sony LIV Stream'],
       'UAE / Middle East': ['beIN Sports 1 Premium English & Arabic', 'TOD App'],
       'Germany': ['DAZN 1 Bar HD', 'Amazon Prime Video Germany'],
@@ -148,27 +147,27 @@ export const FOOTBALL_FIXTURES: Match[] = [
       'United States': 'https://www.paramountplus.com/shows/uefa-champions-league/',
       'India': 'https://www.sonyliv.com/sports'
     },
-    headToHeadSummary: 'The classic European Derby: 28 historical UCL meetings with fierce intensity.',
-    keyPlayers: ['Harry Kane', 'Jamal Musiala', 'Jude Bellingham', 'Rodrygo'],
-    aiMatchInsight: 'Kane leads the Bavarians in Munich against the reigning European champions in an epic clash of titans.'
+    headToHeadSummary: 'European Royalty: 28 historical Champions League meetings. Real Madrid advanced in the thrilling 2024 semi-final.',
+    keyPlayers: ['Harry Kane', 'Jamal Musiala', 'Michael Olise', 'Jude Bellingham', 'Vinícius Júnior', 'Thibaut Courtois'],
+    aiMatchInsight: '12:00 AM PKT in Munich. Kane and Musiala look to break Real Madrid’s unbeaten European knockout pedigree under the Allianz Arena floodlights.'
   },
 
-  // 4. MLS: Inter Miami vs LA Galaxy (Messi in Action)
+  // 4. MLS: Inter Miami vs LA Galaxy - 4:30 AM PKT (11:30 PM UTC / 7:30 PM ET)
   {
-    id: 'fb-mls-01',
+    id: 'fb-mls-mia-lag',
     sport: 'football',
     competitionId: 'mls',
     competitionName: 'MLS (Major League Soccer)',
     competitionLogo: '🇺🇸',
-    formatOrStage: 'Regular Season - Eastern vs Western',
+    formatOrStage: 'Eastern vs Western Conference Clash',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'intermiami')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'lagalaxy')!,
-    utcKickoff: addDays(2, 23, 30), // In 2 days 11:30 PM UTC -> 4:30 AM Next Morning PKT
+    utcKickoff: setSchedule(2, 23, 30), // 11:30 PM UTC = 4:30 AM Next Morning PKT
     venue: 'Chase Stadium',
-    city: 'Fort Lauderdale',
+    city: 'Fort Lauderdale, Florida, USA',
     status: 'scheduled',
     broadcastsByCountry: {
-      'Pakistan': ['Apple TV (MLS Season Pass - Worldwide)', 'Apple TV App'],
+      'Pakistan': ['Apple TV (MLS Season Pass - Worldwide Live & Replay)', 'Apple TV App'],
       'United Kingdom': ['Apple TV (MLS Season Pass)'],
       'United States': ['Apple TV (MLS Season Pass)', 'Fox Sports 1 (Select TV)'],
       'India': ['Apple TV (MLS Season Pass)'],
@@ -182,27 +181,27 @@ export const FOOTBALL_FIXTURES: Match[] = [
       'United States': 'https://tv.apple.com/channel/tvs.sbd.7000',
       'United Kingdom': 'https://tv.apple.com/channel/tvs.sbd.7000'
     },
-    headToHeadSummary: 'Last season ended in a thrilling 1-1 draw with a 92nd-minute Messi equalizer.',
-    keyPlayers: ['Lionel Messi', 'Luis Suárez', 'Riqui Puig', 'Sergio Busquets'],
-    aiMatchInsight: 'Messi and Suárez orchestrate Miami’s potent attack against Puig and the high-flying Galaxy offense.'
+    headToHeadSummary: 'Messi scored a dramatic stoppage-time equalizer in their previous regular season encounter.',
+    keyPlayers: ['Lionel Messi', 'Luis Suárez', 'Sergio Busquets', 'Jordi Alba', 'Riqui Puig', 'Gabriel Pec'],
+    aiMatchInsight: '4:30 AM PKT early morning kickoff. Messi and Suárez lead Miami’s record-setting attack against Puig and the high-pressing Galaxy.'
   },
 
-  // 5. Bundesliga: Bayer Leverkusen vs Borussia Dortmund
+  // 5. Bundesliga: Bayer Leverkusen vs Borussia Dortmund - 9:30 PM PKT (4:30 PM UTC / 6:30 PM CEST)
   {
-    id: 'fb-bnd-01',
+    id: 'fb-bnd-b04-bvb',
     sport: 'football',
     competitionId: 'bundesliga',
     competitionName: 'Bundesliga',
     competitionLogo: '🇩🇪',
-    formatOrStage: 'Spieltag 26',
+    formatOrStage: 'Top 4 Bundesliga Clash',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'leverkusen')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'dortmund')!,
-    utcKickoff: addDays(3, 16, 30), // In 3 days 4:30 PM UTC -> 9:30 PM PKT
+    utcKickoff: setSchedule(3, 16, 30), // 4:30 PM UTC = 9:30 PM PKT
     venue: 'BayArena',
-    city: 'Leverkusen',
+    city: 'Leverkusen, Germany',
     status: 'scheduled',
     broadcastsByCountry: {
-      'Pakistan': ['Sony LIV (Live Stream)', 'Tapmad Sports', 'A Sports HD'],
+      'Pakistan': ['Sony LIV (Live HD Stream)', 'Tapmad Sports', 'A Sports HD'],
       'United Kingdom': ['Sky Sports Football', 'Sky Sports App'],
       'United States': ['ESPN+', 'ESPN App'],
       'India': ['Sony Sports Ten 5 HD', 'Sony LIV'],
@@ -214,38 +213,38 @@ export const FOOTBALL_FIXTURES: Match[] = [
       'India': 'https://www.sonyliv.com/sports',
       'United States': 'https://plus.espn.com'
     },
-    headToHeadSummary: 'High scoring fixture averaging 3.8 goals per match over the last 6 encounters.',
-    keyPlayers: ['Florian Wirtz', 'Granit Xhaka', 'Julian Brandt', 'Serhou Guirassy'],
-    aiMatchInsight: 'Xabi Alonso’s fluid system tests Dortmund’s counter-attacking speed at BayArena.'
+    headToHeadSummary: 'High-octane German fixture averaging 4.1 goals per match in recent meetings.',
+    keyPlayers: ['Florian Wirtz', 'Granit Xhaka', 'Jeremie Frimpong', 'Julian Brandt', 'Serhou Guirassy', 'Karim Adeyemi'],
+    aiMatchInsight: '9:30 PM PKT kickoff at BayArena. Xabi Alonso’s champions take on Nuri Şahin’s high-speed Dortmund transitions.'
   },
 
-  // 6. EPL: Liverpool vs Chelsea (Anfield Blockbuster)
+  // 6. EPL: Liverpool vs Chelsea - 9:30 PM PKT (4:30 PM UTC / 5:30 PM BST)
   {
-    id: 'fb-epl-02',
+    id: 'fb-epl-liv-che',
     sport: 'football',
     competitionId: 'epl',
     competitionName: 'Premier League',
     competitionLogo: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
-    formatOrStage: 'Matchweek 29',
+    formatOrStage: 'Matchweek 8 (Anfield Super Sunday)',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'liverpool')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'chelsea')!,
-    utcKickoff: addDays(5, 16, 30), // In 5 days 4:30 PM UTC -> 9:30 PM PKT
+    utcKickoff: setSchedule(5, 16, 30), // 4:30 PM UTC = 9:30 PM PKT
     venue: 'Anfield',
-    city: 'Liverpool',
+    city: 'Liverpool, England',
     status: 'scheduled',
     broadcastsByCountry: {
-      'Pakistan': ['Tapmad (Live HD)', 'A Sports HD', 'Sony LIV'],
+      'Pakistan': ['Tapmad (Live HD Stream)', 'A Sports HD', 'Sony LIV (Select)'],
       'United Kingdom': ['Sky Sports Main Event', 'Sky Sports Premier League'],
-      'United States': ['Peacock', 'USA Network'],
-      'India': ['Star Sports Select HD 1', 'Disney+ Hotstar'],
+      'United States': ['Peacock Premium', 'USA Network'],
+      'India': ['Star Sports Select HD 1', 'Disney+ Hotstar Live'],
       'UAE / Middle East': ['beIN Sports English 1', 'TOD App']
     },
     watchUrlsByCountry: {
       'Pakistan': 'https://www.tapmad.com/sports',
       'India': 'https://www.hotstar.com/sports'
     },
-    headToHeadSummary: 'A storied rivalry packed with cup finals and dramatic league encounters.',
-    keyPlayers: ['Mohamed Salah', 'Virgil van Dijk', 'Cole Palmer', 'Enzo Fernández'],
-    aiMatchInsight: 'Arne Slot’s relentless Reds host Enzo Maresca’s young, dynamic Chelsea squad.'
+    headToHeadSummary: 'Legendary Premier League rivalry with dramatic recent cup finals and league battles.',
+    keyPlayers: ['Mohamed Salah', 'Virgil van Dijk', 'Trent Alexander-Arnold', 'Cole Palmer', 'Enzo Fernández', 'Nicolas Jackson'],
+    aiMatchInsight: '9:30 PM PKT kickoff at Anfield. Arne Slot’s table-topping Liverpool face Maresca’s resurgent Chelsea driven by Cole Palmer.'
   }
 ];
