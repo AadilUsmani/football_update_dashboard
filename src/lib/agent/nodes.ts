@@ -1,7 +1,6 @@
 import { AgentGraphStateType, TraceStep } from './state';
 import { FOOTBALL_FIXTURES, FOOTBALL_TEAMS } from '../data/footballData';
 import { CRICKET_FIXTURES, CRICKET_TEAMS } from '../data/cricketData';
-import { COUNTRY_BROADCAST_GUIDE } from '../data/broadcasters';
 import { formatFullKickoff, getRelativeCountdown } from '../timezone';
 import { Match, SportType } from '../types';
 
@@ -11,8 +10,8 @@ export async function intentClassifierNode(state: AgentGraphStateType): Promise<
 
   // Detect sport
   let sport: SportType | 'both' = 'both';
-  const cricketKeywords = ['cricket', 'psl', 'ipl', 'bbl', 'test', 't20', 'odi', 'pakistan', 'india', 'babar', 'shaheen', 'kohli', 'csk', 'lahore', 'karachi', 'multan', 'rawalpindi', 'islamabad', 'australia', 'england', 'border-gavaskar', 'mcg', 'scg', 'perth'];
-  const footballKeywords = ['football', 'soccer', 'epl', 'premier league', 'laliga', 'la liga', 'bundesliga', 'ucl', 'champions league', 'mls', 'real madrid', 'barcelona', 'arsenal', 'mancity', 'city', 'liverpool', 'bayern', 'messi', 'inter miami', 'chelsea'];
+  const cricketKeywords = ['cricket', 'psl', 'ipl', 'bbl', 'test', 't20', 'odi', 'pakistan', 'india', 'babar', 'shaheen', 'kohli', 'csk', 'lahore', 'karachi', 'multan', 'rawalpindi', 'islamabad', 'australia', 'england', 'lord', 'edgbaston', 'headingley'];
+  const footballKeywords = ['football', 'soccer', 'epl', 'premier league', 'laliga', 'la liga', 'bundesliga', 'ucl', 'champions league', 'mls', 'real madrid', 'barcelona', 'arsenal', 'mancity', 'city', 'liverpool', 'bayern', 'messi', 'inter miami', 'chelsea', 'sociedad', 'crystal palace'];
 
   const hasCricket = cricketKeywords.some(k => q.includes(k));
   const hasFootball = footballKeywords.some(k => q.includes(k));
@@ -101,10 +100,10 @@ export async function fixtureRetrieverNode(state: AgentGraphStateType): Promise<
       q.includes(m.competitionId.toLowerCase()) ||
       q.includes(m.homeTeam.name.toLowerCase()) ||
       q.includes(m.awayTeam.name.toLowerCase()) ||
-      (q.includes('australia') && (m.homeTeam.name.includes('Australia') || m.awayTeam.name.includes('Australia'))) ||
-      (q.includes('india') && (m.homeTeam.name.includes('India') || m.awayTeam.name.includes('India'))) ||
       (q.includes('pakistan') && (m.homeTeam.name.includes('Pakistan') || m.awayTeam.name.includes('Pakistan'))) ||
-      (q.includes('england') && (m.homeTeam.name.includes('England') || m.awayTeam.name.includes('England')))
+      (q.includes('england') && (m.homeTeam.name.includes('England') || m.awayTeam.name.includes('England'))) ||
+      (q.includes('madrid') && (m.homeTeam.name.includes('Madrid') || m.awayTeam.name.includes('Madrid'))) ||
+      (q.includes('city') && (m.homeTeam.name.includes('City') || m.awayTeam.name.includes('City')))
     );
     if (compMatches.length > 0) {
       matched = compMatches;
@@ -117,7 +116,7 @@ export async function fixtureRetrieverNode(state: AgentGraphStateType): Promise<
 
   const traceStep: TraceStep = {
     node: 'FixtureRetriever',
-    description: `Retrieved ${matched.length} authentic upcoming matches from official sports schedule`,
+    description: `Retrieved ${matched.length} authentic upcoming matches from official 2026 schedule`,
     timestamp: new Date().toISOString(),
     outputSummary: `Matched: ${matched.map(m => `${m.homeTeam.shortName} vs ${m.awayTeam.shortName}`).join(', ')}`
   };
@@ -173,7 +172,7 @@ export async function insightSynthesizerNode(state: AgentGraphStateType): Promis
   const tz = entities?.timezone || 'Asia/Karachi';
 
   if (!matchedMatches || matchedMatches.length === 0) {
-    const defaultMsg = `I couldn't find a direct fixture match for "${query}". You can browse all verified upcoming Premier League, MLS, La Liga, Champions League, PSL 10, Border-Gavaskar Trophy, and International Cricket matches right on the dashboard!`;
+    const defaultMsg = `I couldn't find a direct fixture match for "${query}". You can browse all verified upcoming Premier League, La Liga, and Pakistan Tour of England matches on the dashboard!`;
     return {
       finalAnswer: defaultMsg,
       traceSteps: [{
@@ -189,9 +188,13 @@ export async function insightSynthesizerNode(state: AgentGraphStateType): Promis
   const formattedTime = formatFullKickoff(primaryMatch.utcKickoff, tz, false);
   const channels = primaryMatch.broadcastsByCountry[country] || primaryMatch.broadcastsByCountry['Pakistan'] || ['Local listings'];
 
-  let answer = `### 🏆 Official Match Schedule & Intelligence\n\n`;
+  let answer = `### 🏆 Official 2026 Match Intelligence\n\n`;
   answer += `**${primaryMatch.homeTeam.name} vs ${primaryMatch.awayTeam.name}**\n`;
-  answer += `📌 **Tournament / Series:** ${primaryMatch.competitionName} (${primaryMatch.formatOrStage})\n`;
+  if (primaryMatch.seriesOrTourName) {
+    answer += `📌 **Tour / Series:** ${primaryMatch.seriesOrTourName} (${primaryMatch.formatOrStage})\n`;
+  } else {
+    answer += `📌 **Competition:** ${primaryMatch.competitionName} (${primaryMatch.formatOrStage})\n`;
+  }
   answer += `⏰ **Kickoff Time (${tz === 'Asia/Karachi' ? 'PKT' : tz}):** ${formattedTime} *(${countdown.text})*\n`;
   answer += `🏟️ **Venue:** ${primaryMatch.venue}, ${primaryMatch.city}\n\n`;
 
@@ -205,15 +208,15 @@ export async function insightSynthesizerNode(state: AgentGraphStateType): Promis
   }
 
   if (primaryMatch.headToHeadSummary) {
-    answer += `\n**📊 Head to Head:** ${primaryMatch.headToHeadSummary}\n`;
+    answer += `\n**📊 Series Context:** ${primaryMatch.headToHeadSummary}\n`;
   }
 
   if (primaryMatch.keyPlayers && primaryMatch.keyPlayers.length > 0) {
-    answer += `\n**⭐ Key Players to Watch:** ${primaryMatch.keyPlayers.join(', ')}\n`;
+    answer += `\n**⭐ Key Players:** ${primaryMatch.keyPlayers.join(', ')}\n`;
   }
 
   if (primaryMatch.aiMatchInsight) {
-    answer += `\n**💡 Match Breakdown:** ${primaryMatch.aiMatchInsight}\n`;
+    answer += `\n**💡 Tactical Breakdown:** ${primaryMatch.aiMatchInsight}\n`;
   }
 
   if (matchedMatches.length > 1) {
@@ -221,7 +224,7 @@ export async function insightSynthesizerNode(state: AgentGraphStateType): Promis
     matchedMatches.slice(1, 4).forEach(m => {
       const time = formatFullKickoff(m.utcKickoff, tz, false);
       const chs = m.broadcastsByCountry[country] || m.broadcastsByCountry['Pakistan'] || [];
-      answer += `- **${m.homeTeam.name} vs ${m.awayTeam.name}** (${m.competitionName}) • *${time}* • 📺 ${chs[0] || 'Check Network'}\n`;
+      answer += `- **${m.homeTeam.name} vs ${m.awayTeam.name}** • *${time}* • 📺 ${chs[0] || 'Check Network'}\n`;
     });
   }
 
