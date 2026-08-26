@@ -8,7 +8,6 @@ export const TIMEZONE_OPTIONS: TimezoneOption[] = [
   { code: 'CET', label: 'Central Europe (CET/CEST - UTC+1)', iana: 'Europe/Madrid', offset: '+01:00' },
   { code: 'GST', label: 'Gulf / Dubai (GST - UTC+4)', iana: 'Asia/Dubai', offset: '+04:00' },
   { code: 'IST', label: 'India Standard Time (IST - UTC+5:30)', iana: 'Asia/Kolkata', offset: '+05:30' },
-  { code: 'AST', label: 'Saudi Arabia (AST - UTC+3)', iana: 'Asia/Riyadh', offset: '+03:00' },
   { code: 'AEST', label: 'Australia / Sydney (AEST - UTC+10)', iana: 'Australia/Sydney', offset: '+10:00' },
 ];
 
@@ -18,11 +17,9 @@ export const COUNTRY_OPTIONS: CountryOption[] = [
   { code: 'US', name: 'United States', flag: '🇺🇸' },
   { code: 'IN', name: 'India', flag: '🇮🇳' },
   { code: 'AE', name: 'UAE / Middle East', flag: '🇦🇪' },
-  { code: 'SA', name: 'Saudi Arabia', flag: '🇸🇦' },
+  { code: 'AU', name: 'Australia', flag: '🇦🇺' },
   { code: 'DE', name: 'Germany', flag: '🇩🇪' },
   { code: 'ES', name: 'Spain', flag: '🇪🇸' },
-  { code: 'CA', name: 'Canada', flag: '🇨🇦' },
-  { code: 'AU', name: 'Australia', flag: '🇦🇺' },
 ];
 
 export function getResolvedIana(tzIana: string): string {
@@ -75,19 +72,18 @@ export function formatFullKickoff(utcString: string, ianaTimezone: string = 'Asi
   return `${dateStr} • ${timeStr} ${tzAbbr}`.trim();
 }
 
-export function getRelativeCountdown(utcString: string, durationMinutes: number = 110): { status: 'upcoming' | 'live' | 'finished'; text: string } {
+export function getRelativeCountdown(utcString: string): { status: 'upcoming' | 'live' | 'finished'; text: string } {
   try {
     const matchTime = new Date(utcString).getTime();
     const now = Date.now();
     const diffMs = matchTime - now;
 
     if (diffMs <= 0) {
-      const matchEndMs = matchTime + durationMinutes * 60 * 1000;
+      const matchEndMs = matchTime + 120 * 60 * 1000;
       if (now < matchEndMs) {
-        const elapsedMins = Math.floor((now - matchTime) / (60 * 1000));
-        return { status: 'live', text: `LIVE (${elapsedMins}')` };
+        return { status: 'live', text: `LIVE MATCH` };
       }
-      return { status: 'finished', text: 'Full Time' };
+      return { status: 'upcoming', text: 'Scheduled' };
     }
 
     const totalSeconds = Math.floor(diffMs / 1000);
@@ -95,6 +91,10 @@ export function getRelativeCountdown(utcString: string, durationMinutes: number 
     const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
 
+    if (days > 30) {
+      const months = Math.floor(days / 30);
+      return { status: 'upcoming', text: `In ${months} month${months > 1 ? 's' : ''}` };
+    }
     if (days > 0) {
       return { status: 'upcoming', text: `In ${days}d ${hours}h` };
     }

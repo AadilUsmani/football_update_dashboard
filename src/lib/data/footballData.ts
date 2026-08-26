@@ -10,21 +10,21 @@ export const FOOTBALL_LEAGUES = [
 ];
 
 export const FOOTBALL_TEAMS: Team[] = [
-  // EPL with reliable crest URLs
+  // EPL
   { id: 'arsenal', name: 'Arsenal', shortName: 'ARS', crest: 'https://crests.football-data.org/57.png', sport: 'football', leagueOrCountry: 'Premier League', recentForm: ['W', 'W', 'W', 'D', 'W'] },
   { id: 'mancity', name: 'Manchester City', shortName: 'MCI', crest: 'https://crests.football-data.org/65.png', sport: 'football', leagueOrCountry: 'Premier League', recentForm: ['W', 'W', 'W', 'W', 'W'] },
   { id: 'liverpool', name: 'Liverpool', shortName: 'LIV', crest: 'https://crests.football-data.org/64.png', sport: 'football', leagueOrCountry: 'Premier League', recentForm: ['W', 'W', 'W', 'W', 'D'] },
   { id: 'manunited', name: 'Manchester United', shortName: 'MUN', crest: 'https://crests.football-data.org/66.png', sport: 'football', leagueOrCountry: 'Premier League', recentForm: ['W', 'L', 'W', 'D', 'L'] },
   { id: 'chelsea', name: 'Chelsea', shortName: 'CHE', crest: 'https://crests.football-data.org/61.png', sport: 'football', leagueOrCountry: 'Premier League', recentForm: ['L', 'W', 'D', 'W', 'W'] },
   { id: 'brighton', name: 'Brighton & Hove Albion', shortName: 'BHA', crest: 'https://crests.football-data.org/397.png', sport: 'football', leagueOrCountry: 'Premier League', recentForm: ['W', 'W', 'W', 'D', 'L'] },
+  { id: 'tottenham', name: 'Tottenham Hotspur', shortName: 'TOT', crest: 'https://crests.football-data.org/73.png', sport: 'football', leagueOrCountry: 'Premier League', recentForm: ['D', 'W', 'L', 'W', 'W'] },
 
   // La Liga
   { id: 'realmadrid', name: 'Real Madrid', shortName: 'RMA', crest: 'https://crests.football-data.org/86.png', sport: 'football', leagueOrCountry: 'La Liga', recentForm: ['W', 'D', 'W', 'W', 'W'] },
   { id: 'barcelona', name: 'FC Barcelona', shortName: 'FCB', crest: 'https://crests.football-data.org/81.png', sport: 'football', leagueOrCountry: 'La Liga', recentForm: ['W', 'W', 'W', 'W', 'W'] },
-  { id: 'atletico', name: 'Atlético Madrid', shortName: 'ATM', crest: 'https://crests.football-data.org/78.png', sport: 'football', leagueOrCountry: 'La Liga', recentForm: ['D', 'W', 'D', 'W', 'W'] },
   { id: 'realbetis', name: 'Real Betis', shortName: 'BET', crest: 'https://crests.football-data.org/90.png', sport: 'football', leagueOrCountry: 'La Liga', recentForm: ['D', 'D', 'W', 'L', 'D'] },
 
-  // Champions League & Bundesliga
+  // UCL & Bundesliga
   { id: 'bayern', name: 'Bayern München', shortName: 'BAY', crest: 'https://crests.football-data.org/5.png', sport: 'football', leagueOrCountry: 'Bundesliga', recentForm: ['W', 'W', 'W', 'W', 'D'] },
   { id: 'leverkusen', name: 'Bayer 04 Leverkusen', shortName: 'B04', crest: 'https://crests.football-data.org/3.png', sport: 'football', leagueOrCountry: 'Bundesliga', recentForm: ['W', 'W', 'W', 'D', 'W'] },
   { id: 'intermilan', name: 'Inter Milan', shortName: 'INT', crest: 'https://crests.football-data.org/108.png', sport: 'football', leagueOrCountry: 'Champions League', recentForm: ['D', 'W', 'W', 'W', 'W'] },
@@ -34,58 +34,53 @@ export const FOOTBALL_TEAMS: Team[] = [
   { id: 'chicagofire', name: 'Chicago Fire', shortName: 'CHI', crest: '', sport: 'football', leagueOrCountry: 'MLS', recentForm: ['D', 'L', 'W', 'L', 'D'] },
 ];
 
-const now = new Date();
-const addDays = (d: number, hourUtc: number = 15, minuteUtc: number = 0) => {
-  const date = new Date(now.getTime() + d * 24 * 60 * 60 * 1000);
-  date.setUTCHours(hourUtc, minuteUtc, 0, 0);
-  return date.toISOString();
-};
-
 export const FOOTBALL_FIXTURES: Match[] = [
-  // 1. EPL: Manchester United vs Liverpool (Super Sunday at Old Trafford) - 8:00 PM PKT (3:00 PM UTC / 4:00 PM BST)
+  // 1. EPL Matchweek 3: Manchester United vs Liverpool (Super Sunday)
   {
     id: 'fb-epl-mun-liv',
     sport: 'football',
     competitionId: 'epl',
     competitionName: 'Premier League',
-    competitionLogo: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    seriesOrTourName: 'Premier League 2024/25 Season',
     formatOrStage: 'Matchweek 3 (Super Sunday)',
+    scheduleContext: 'current_series',
+    dateLabel: 'Sunday • 8:00 PM PKT',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'manunited')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'liverpool')!,
-    utcKickoff: addDays(1, 15, 0), // 3:00 PM UTC = 8:00 PM PKT (4:00 PM BST)
+    utcKickoff: '2024-09-01T15:00:00Z', // 3:00 PM UTC = 8:00 PM PKT (4:00 PM BST)
     venue: 'Old Trafford',
     city: 'Manchester, England',
     status: 'scheduled',
     broadcastsByCountry: {
       'Pakistan': ['Tapmad (Exclusive Live HD Stream)', 'A Sports HD (Satellite/Cable)', 'Sony LIV (Select)'],
       'United Kingdom': ['Sky Sports Main Event', 'Sky Sports Premier League', 'NOW TV'],
-      'United States': ['Peacock Premium', 'USA Network', 'Telemundo'],
+      'United States': ['Peacock Premium', 'USA Network'],
       'India': ['Star Sports Select HD 1', 'Disney+ Hotstar Live'],
-      'UAE / Middle East': ['beIN Sports 1 Premium English & Arabic', 'TOD App Stream'],
-      'Germany': ['Sky Sport Bundesliga', 'WOW Live Stream']
+      'UAE / Middle East': ['beIN Sports 1 Premium', 'TOD App Stream']
     },
     watchUrlsByCountry: {
       'Pakistan': 'https://www.tapmad.com/sports',
       'United Kingdom': 'https://www.sky.com/sports/football',
-      'United States': 'https://www.peacocktv.com/sports',
-      'India': 'https://www.hotstar.com/sports/football'
+      'United States': 'https://www.peacocktv.com/sports'
     },
-    headToHeadSummary: 'The biggest fixture in English football. High intensity drama at Old Trafford.',
-    keyPlayers: ['Bruno Fernandes (C)', 'Marcus Rashford', 'Mohamed Salah', 'Virgil van Dijk (C)', 'Luis Díaz'],
-    aiMatchInsight: '8:00 PM PKT kickoff. Arne Slot takes Liverpool to Old Trafford in the biggest test of the early Premier League season.'
+    headToHeadSummary: 'The grandest rivalry in English football. Arne Slot’s first competitive visit to Old Trafford.',
+    keyPlayers: ['Bruno Fernandes (C)', 'Marcus Rashford', 'Mohamed Salah', 'Virgil van Dijk (C)'],
+    aiMatchInsight: '8:00 PM PKT kickoff. Liverpool visits Old Trafford in the headline clash of Matchweek 3.'
   },
 
-  // 2. EPL: Arsenal vs Brighton - 4:30 PM PKT (11:30 AM UTC / 12:30 PM BST Lunchtime Kickoff)
+  // 2. EPL Matchweek 3: Arsenal vs Brighton (Saturday Lunchtime)
   {
     id: 'fb-epl-ars-bha',
     sport: 'football',
     competitionId: 'epl',
     competitionName: 'Premier League',
-    competitionLogo: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    seriesOrTourName: 'Premier League 2024/25 Season',
     formatOrStage: 'Matchweek 3 (Saturday Lunchtime)',
+    scheduleContext: 'current_series',
+    dateLabel: 'Saturday • 4:30 PM PKT',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'arsenal')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'brighton')!,
-    utcKickoff: addDays(2, 11, 30), // 11:30 AM UTC = 4:30 PM PKT (12:30 PM London)
+    utcKickoff: '2024-08-31T11:30:00Z', // 11:30 AM UTC = 4:30 PM PKT (12:30 PM London)
     venue: 'Emirates Stadium',
     city: 'London, England',
     status: 'scheduled',
@@ -99,22 +94,24 @@ export const FOOTBALL_FIXTURES: Match[] = [
       'Pakistan': 'https://www.tapmad.com/sports',
       'United Kingdom': 'https://www.tntsports.co.uk'
     },
-    headToHeadSummary: 'Both teams enter with unbeaten records in the opening rounds.',
-    keyPlayers: ['Bukayo Saka', 'Martin Ødegaard (C)', 'Kai Havertz', 'Kaoru Mitoma', 'Danny Welbeck'],
-    aiMatchInsight: '4:30 PM PKT Saturday kickoff at the Emirates.'
+    headToHeadSummary: 'Both sides looking to maintain their 100% win records.',
+    keyPlayers: ['Bukayo Saka', 'Martin Ødegaard (C)', 'Kai Havertz', 'Kaoru Mitoma'],
+    aiMatchInsight: '4:30 PM PKT kickoff at Emirates Stadium.'
   },
 
-  // 3. La Liga: Real Madrid vs Real Betis - 12:30 AM Midnight PKT (7:30 PM UTC / 9:30 PM CEST)
+  // 3. La Liga Jornada 4: Real Madrid vs Real Betis (Bernabéu Night Game)
   {
     id: 'fb-laliga-rma-bet',
     sport: 'football',
     competitionId: 'laliga',
     competitionName: 'La Liga',
-    competitionLogo: '🇪🇸',
-    formatOrStage: 'Jornada 4 (Bernabéu Night Game)',
+    seriesOrTourName: 'La Liga EA SPORTS 2024/25',
+    formatOrStage: 'Jornada 4 (Night Game)',
+    scheduleContext: 'current_series',
+    dateLabel: 'Sunday • 12:30 AM Midnight PKT',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'realmadrid')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'realbetis')!,
-    utcKickoff: addDays(2, 19, 30), // 7:30 PM UTC = 12:30 AM Midnight PKT
+    utcKickoff: '2024-09-01T19:30:00Z', // 7:30 PM UTC = 12:30 AM Midnight PKT (9:30 PM Madrid)
     venue: 'Santiago Bernabéu',
     city: 'Madrid, Spain',
     status: 'scheduled',
@@ -127,25 +124,26 @@ export const FOOTBALL_FIXTURES: Match[] = [
     },
     watchUrlsByCountry: {
       'Pakistan': 'https://www.tapmad.com/sports',
-      'United States': 'https://plus.espn.com',
-      'India': 'https://www.jiocinema.com/sports'
+      'United States': 'https://plus.espn.com'
     },
-    headToHeadSummary: 'Real Betis has historically frustrated Madrid at the Bernabéu with low-scoring draws.',
-    keyPlayers: ['Kylian Mbappé', 'Vinícius Júnior', 'Rodrygo', 'Isco', 'Nabil Fekir'],
-    aiMatchInsight: '12:30 AM PKT start under the Bernabéu roof. Mbappé aims for his first La Liga home goals.'
+    headToHeadSummary: 'Kylian Mbappé and Vinícius lead the European champions at the Bernabéu.',
+    keyPlayers: ['Kylian Mbappé', 'Vinícius Júnior', 'Rodrygo', 'Isco'],
+    aiMatchInsight: '12:30 AM PKT start under the Bernabéu roof.'
   },
 
-  // 4. UCL: Manchester City vs Inter Milan - 12:00 AM Midnight PKT (7:00 PM UTC / 8:00 PM BST)
+  // 4. UEFA Champions League: Manchester City vs Inter Milan (Matchday 1)
   {
     id: 'fb-ucl-mci-int',
     sport: 'football',
     competitionId: 'ucl',
     competitionName: 'UEFA Champions League',
-    competitionLogo: '🏆',
-    formatOrStage: 'League Phase Matchday 1 (2023 Final Rematch)',
+    seriesOrTourName: 'UCL League Phase 2024/25',
+    formatOrStage: 'Matchday 1 (2023 Final Rematch)',
+    scheduleContext: 'upcoming_tour',
+    dateLabel: 'Sep 18, 2024 • 12:00 AM Midnight PKT',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'mancity')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'intermilan')!,
-    utcKickoff: addDays(4, 19, 0), // 7:00 PM UTC = 12:00 AM Midnight PKT
+    utcKickoff: '2024-09-18T19:00:00Z', // 7:00 PM UTC = 12:00 AM Midnight PKT
     venue: 'Etihad Stadium',
     city: 'Manchester, England',
     status: 'scheduled',
@@ -160,22 +158,24 @@ export const FOOTBALL_FIXTURES: Match[] = [
       'Pakistan': 'https://www.tapmad.com',
       'United States': 'https://www.paramountplus.com'
     },
-    headToHeadSummary: 'Rematch of the 2023 Champions League Istanbul Final where City won 1-0.',
-    keyPlayers: ['Erling Haaland', 'Kevin De Bruyne', 'Rodri', 'Lautaro Martínez (C)', 'Nicolò Barella'],
+    headToHeadSummary: 'Rematch of the 2023 Istanbul Champions League Final.',
+    keyPlayers: ['Erling Haaland', 'Kevin De Bruyne', 'Rodri', 'Lautaro Martínez (C)'],
     aiMatchInsight: '12:00 AM PKT marquee European night.'
   },
 
-  // 5. MLS: Inter Miami vs Chicago Fire - 4:30 AM PKT (11:30 PM UTC / 7:30 PM ET)
+  // 5. MLS: Inter Miami vs Chicago Fire
   {
     id: 'fb-mls-mia-chi',
     sport: 'football',
     competitionId: 'mls',
     competitionName: 'MLS (Major League Soccer)',
-    competitionLogo: '🇺🇸',
-    formatOrStage: 'MLS Regular Season (Eastern Conference)',
+    seriesOrTourName: 'MLS Regular Season 2024',
+    formatOrStage: 'Eastern Conference Clash',
+    scheduleContext: 'current_series',
+    dateLabel: 'Sunday • 4:30 AM PKT',
     homeTeam: FOOTBALL_TEAMS.find(t => t.id === 'intermiami')!,
     awayTeam: FOOTBALL_TEAMS.find(t => t.id === 'chicagofire')!,
-    utcKickoff: addDays(3, 23, 30), // 11:30 PM UTC = 4:30 AM PKT
+    utcKickoff: '2024-09-01T23:30:00Z', // 11:30 PM UTC = 4:30 AM PKT (7:30 PM ET)
     venue: 'Chase Stadium',
     city: 'Fort Lauderdale, Florida, USA',
     status: 'scheduled',
@@ -183,15 +183,13 @@ export const FOOTBALL_FIXTURES: Match[] = [
       'Pakistan': ['Apple TV (MLS Season Pass - Worldwide Live)', 'Apple TV App'],
       'United Kingdom': ['Apple TV (MLS Season Pass)'],
       'United States': ['Apple TV (MLS Season Pass)'],
-      'India': ['Apple TV (MLS Season Pass)'],
-      'UAE / Middle East': ['Apple TV (MLS Season Pass)']
+      'India': ['Apple TV (MLS Season Pass)']
     },
     watchUrlsByCountry: {
-      'Pakistan': 'https://tv.apple.com/channel/tvs.sbd.7000',
-      'United States': 'https://tv.apple.com/channel/tvs.sbd.7000'
+      'Pakistan': 'https://tv.apple.com/channel/tvs.sbd.7000'
     },
-    headToHeadSummary: 'Miami leads the Eastern Conference supporters shield race with high-powered offense.',
+    headToHeadSummary: 'Inter Miami defending their top spot in the Supporters’ Shield race.',
     keyPlayers: ['Lionel Messi', 'Luis Suárez', 'Sergio Busquets', 'Jordi Alba'],
-    aiMatchInsight: '4:30 AM PKT early morning kickoff.'
+    aiMatchInsight: '4:30 AM PKT morning kickoff in Pakistan.'
   }
 ];

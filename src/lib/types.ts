@@ -14,23 +14,19 @@ export interface Team {
   recentForm?: ('W' | 'D' | 'L')[];
 }
 
-export interface BroadcastChannel {
-  name: string;
-  type: 'tv' | 'ott' | 'free';
-  logo?: string;
-  link?: string;
-}
-
 export interface Match {
   id: string;
   sport: SportType;
   competitionId: FootballLeagueId | CricketFormatId;
   competitionName: string;
-  competitionLogo: string;
+  competitionLogo?: string;
+  seriesOrTourName?: string;
   formatOrStage: string;
+  scheduleContext?: 'live_now' | 'current_series' | 'upcoming_tour' | 'future_window';
+  dateLabel?: string;
   homeTeam: Team;
   awayTeam: Team;
-  utcKickoff: string; // ISO 8601 UTC string
+  utcKickoff: string;
   venue: string;
   city: string;
   status: 'scheduled' | 'live' | 'finished';
@@ -39,7 +35,7 @@ export interface Match {
     away: string | number;
     detail?: string;
   };
-  broadcastsByCountry: Record<string, string[]>; // e.g. "Pakistan": ["Tapmad (Live OTT)", "A Sports HD", "PTV Sports"]
+  broadcastsByCountry: Record<string, string[]>;
   watchUrlsByCountry?: Record<string, string>;
   headToHeadSummary?: string;
   keyPlayers?: string[];
@@ -57,22 +53,6 @@ export interface CountryOption {
   code: string;
   name: string;
   flag: string;
-}
-
-export interface CalendarEventPayload {
-  title: string;
-  description: string;
-  location: string;
-  startTimeUtc: string;
-  endTimeUtc: string;
-}
-
-export interface ReminderSubscription {
-  matchId: string;
-  email: string;
-  timeBeforeMinutes: number;
-  matchTitle: string;
-  kickoffFormatted: string;
 }
 
 export interface AgentGraphState {
